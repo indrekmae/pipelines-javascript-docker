@@ -17,7 +17,7 @@ variables:
   dockerRegistryServiceConnection: '0b6e4ff0-8e09-4840-bc90-67db95a5127a'
   imageRepository: 'mydocimage1'
   ImageName: 'javascriptapp'
-  containerRegistry: 'nortalcicddemo.azurecr.io'
+  ContainerRegistry: 'nortalcicddemo.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
   tag: '$(Build.BuildId)'
 
