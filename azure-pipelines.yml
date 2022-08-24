@@ -10,6 +10,7 @@ resources:
 
 pool:
   name: 'Nortal agents pool'
+  demands: docker
   vmImage: ubuntu-latest
 
 variables:
