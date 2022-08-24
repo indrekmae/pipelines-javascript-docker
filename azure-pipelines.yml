@@ -16,30 +16,38 @@ pool:
 variables:
   dockerRegistryServiceConnection: '0b6e4ff0-8e09-4840-bc90-67db95a5127a'
   imageRepository: 'mydocimage1'
-  imageName: 'mydocimage2'
+  ImageName: 'mydocimage2'
   containerRegistry: 'nortalcicddemo.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
   tag: '$(Build.BuildId)'
 
 stages:
-- stage: Build
-  displayName: Build image
+- stage: CI
+  displayName: 'CI stage'
   jobs:
-  - job: Build
-    displayName: Build
-    steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
-        tags: |
-          $(tag)
-    - task: Docker@2
-      displayName: Save image to TAR
-      inputs:
-        command: save
-        Dockerfile: $(dockerfilePath)
-        arguments: |
-          --output $(build.artifactstagingdirectory)/$(imageName).image.tar $(imageName).$(tag)
-
+   - job: Build
+     displayName: 'Build'
+     steps:
+      # Add all the tasks you need to build your project
+   
+     - task: Docker@2
+       displayName: 'Build image'
+       inputs:
+         repository: '$(ImageName)'
+         command: build
+         Dockerfile: $(dockerfilePath)
+         tags: $(Build.BuildId)
+           
+     - task: Docker@2
+       displayName: 'Save image to TAR'
+       inputs:
+         repository: '$(ImageName)'
+         command: save
+         arguments: '--output $(build.artifactstagingdirectory)/$(ImageName).image.tar $(ImageName):$(Build.BuildId)'
+         addPipelineData: false
+   
+     - task: PublishPipelineArtifact@1
+       displayName: 'Publishing Image as Pipeline Artifact'
+       inputs:
+         path: $(build.artifactstagingdirectory)
+         artifact: ContainerImage
