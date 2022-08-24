@@ -8,16 +8,17 @@ trigger:
 resources:
 - repo: self
 
+pool:
+  name: 'Nortal agents pool'
+  vmImage: ubuntu-latest
+
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: 'bbc00546-6924-4a6f-981e-eb246a6761fb'
+  dockerRegistryServiceConnection: '0b6e4ff0-8e09-4840-bc90-67db95a5127a'
   imageRepository: 'mydocimage1'
-  containerRegistry: 'devsecopscontainer212.azurecr.io'
+  containerRegistry: 'nortalcicddemo.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
   tag: '$(Build.BuildId)'
-
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
 
 stages:
 - stage: Build
