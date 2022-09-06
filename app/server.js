@@ -3,7 +3,7 @@ const app = express()
 const port = 8080
 
 app.get('/', (req, res) => {
-  res.send('Hello World! This is dockerized node 12 based javascript website!')
+  res.send('Hello World! This is dockerized node 12 based javascript website! THIS IS DEMO CHANGE')
 })
 
 app.listen(port, () => {
