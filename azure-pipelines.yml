@@ -14,7 +14,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  dockerRegistryServiceConnection: '0b6e4ff0-8e09-4840-bc90-67db95a5127a'
+  dockerRegistryServiceConnection: '9bfa2407-f616-4363-a7e9-61f4d5a560cb'
   imageRepository: 'mydocimage1'
   ImageName: 'javascriptapp'
   ContainerRegistry: 'nortalcicddemo.azurecr.io'
